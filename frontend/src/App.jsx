@@ -64,6 +64,9 @@ function App() {
 
     return (
         <div className='app'>
+            <div>
+                <button onClick={handleLogout}>Logout</button>
+            </div>
             {error && <p>{error}</p>}
             <TodoForm onAdd={handleAdd} />
             <TodoList todos={todos} onToggle={handleToggle} onDelete={handleDelete} />
