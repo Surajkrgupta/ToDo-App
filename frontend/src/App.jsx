@@ -1,6 +1,3 @@
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
 import { useEffect, useState } from 'react'
 import { getTodos, addTodo, toggleTodo, deleteTodo, updateTitle } from './api.js'
@@ -12,7 +9,10 @@ function App() {
     const [todos, setTodos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    
     const [isLoginIn, setIsLoginIn] = useState(!!localStorage.getItem('token'));
+    const handleAuth = () => setIsLoginIn(true);
+    if (!isLoginIn) return <AuthForm onAuth={handleAuth} />;
     useEffect(() => {
         if (!isLoginIn) {
             setLoading(false);
@@ -23,13 +23,14 @@ function App() {
             .catch(() => setError("Unable To Load"))
             .finally(() => setLoading(false));
     }, [isLoginIn]);
+    
 
-    const handleAuth = () => setIsLoggedIn(true);
-    const handleLogOut=()=>{
+    
+    const handleLogout=()=>{
         localStorage.removeItem('token');
         setIsLoginIn(false);
         setTodos([]);
-    }
+    };
 
     const handleAdd = async (title) => {
         try {
@@ -58,7 +59,6 @@ function App() {
         }
     };
 
-    if (loading) return <p>Loading...</p>;
 
     return (
         <div className='app'>
