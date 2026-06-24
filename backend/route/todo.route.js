@@ -1,7 +1,11 @@
 import express from 'express';
 import Todo from '../model/Todo.model.js';
+import {protect} from'../middleware/auth.middleware.js';
+
+
 
 const router = express.Router();
+router.use(protect);
 
 router.get('/',async(req,res)=>{
     try{
