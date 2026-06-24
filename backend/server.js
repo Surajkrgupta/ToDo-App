@@ -5,9 +5,9 @@ import dns from 'dns';
 import cros from'cors';
 import todoRoute from './route/todo.route.js'
 import authRoute from'./route/auth.route.js';
-
-const app=express();
 dotenv.config();
+const app=express();
+
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 app.use(express.json())

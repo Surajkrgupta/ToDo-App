@@ -9,10 +9,10 @@ function App() {
     const [todos, setTodos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    
+
     const [isLoginIn, setIsLoginIn] = useState(!!localStorage.getItem('token'));
-    const handleAuth = () => setIsLoginIn(true);
-    if (!isLoginIn) return <AuthForm onAuth={handleAuth} />;
+
+
     useEffect(() => {
         if (!isLoginIn) {
             setLoading(false);
@@ -23,10 +23,11 @@ function App() {
             .catch(() => setError("Unable To Load"))
             .finally(() => setLoading(false));
     }, [isLoginIn]);
-    
+    const handleAuth = () => setIsLoginIn(true);
 
-    
-    const handleLogout=()=>{
+
+
+    const handleLogout = () => {
         localStorage.removeItem('token');
         setIsLoginIn(false);
         setTodos([]);
@@ -58,7 +59,8 @@ function App() {
             setError('Could not delete todo');
         }
     };
-
+    if (!isLoginIn) return <AuthForm onAuth={handleAuth} />;
+    if (loading) return <p>Loading...</p>;
 
     return (
         <div className='app'>

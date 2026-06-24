@@ -6,6 +6,7 @@ import User from '../model/User.model.js';
 const router =express.Router();
 
 router.post('/register',async(req,res)=>{
+    console.log('Body received:', req.body); // ← add this
     try{
         const {email,password}=req.body;
         if(!email||!password) return res.status(400).json({message:'Email and password'})
