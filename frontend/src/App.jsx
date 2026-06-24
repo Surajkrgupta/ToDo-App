@@ -2,23 +2,36 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
-import { useEffect,useState } from 'react'
-import { getTodos,addTodo,toggleTodo,deleteTodo,updateTitle  } from './api.js'
+import { useEffect, useState } from 'react'
+import { getTodos, addTodo, toggleTodo, deleteTodo, updateTitle } from './api.js'
 import TodoForm from './TodoForm.jsx'
 import TodoList from './TodoList.jsx'
+import AuthForm from './components/AuthForm.jsx'
 
 function App() {
-  const [todos,setTodos]=useState([]);
-  const [loading, setLoading]=useState(true);
-  const [error,setError]=useState(null);
-  useEffect(()=>{
-    getTodos()
-      .then((data) => { console.log('API returned:', data); setTodos(data); })
-      .catch(()=>setError("Unable To Load"))
-      .finally(()=>setLoading(false));
-},[]);
+    const [todos, setTodos] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [isLoginIn, setIsLoginIn] = useState(!!localStorage.getItem('token'));
+    useEffect(() => {
+        if (!isLoginIn) {
+            setLoading(false);
+            return;
+        }
+        getTodos()
+            .then(setTodos)
+            .catch(() => setError("Unable To Load"))
+            .finally(() => setLoading(false));
+    }, [isLoginIn]);
 
-  const handleAdd = async (title) => {
+    const handleAuth = () => setIsLoggedIn(true);
+    const handleLogOut=()=>{
+        localStorage.removeItem('token');
+        setIsLoginIn(false);
+        setTodos([]);
+    }
+
+    const handleAdd = async (title) => {
         try {
             const newTodo = await addTodo(title);
             setTodos((prev) => [...prev, newTodo]);
@@ -47,13 +60,13 @@ function App() {
 
     if (loading) return <p>Loading...</p>;
 
-  return (
-    <div className='app'>
-      {error && <p>{error}</p>}
-      <TodoForm onAdd={handleAdd}/>
-      <TodoList todos={todos} onToggle={handleToggle} onDelete={handleDelete}/>
-    </div>
-  );
+    return (
+        <div className='app'>
+            {error && <p>{error}</p>}
+            <TodoForm onAdd={handleAdd} />
+            <TodoList todos={todos} onToggle={handleToggle} onDelete={handleDelete} />
+        </div>
+    );
 }
 
 export default App

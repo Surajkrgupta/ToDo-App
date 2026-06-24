@@ -1,4 +1,32 @@
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api/todos';
+const AUTH_URL=BASE_URL.replace('/api/todos','api/auth');
+
+const authHeader=()=>({
+    'Content-Type':'application/json',
+    'Authorization':`Bearer ${localStorage.getItem('token')}`
+});
+
+export const register=async(mail,password)=>{
+    const res=await fetch(`${AUTH_URL}/register`,{
+        method:POST,
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({email,password})
+        
+    });
+    if(!res.ok) throw new Error('Registration Failed');
+        return res.json();
+}
+
+export const login=async(mail,password)=>{
+    const res=await fetch(`${AUTH_URL}/login`,{
+        method:POST,
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({email,password})
+    });
+    if(!res.ok) throw new Error('Invalid Mail or Password');
+    return res.json();
+
+}
 
 export const getTodos = async () => {
     const res = await fetch(BASE_URL);
