@@ -5,6 +5,9 @@ import User from '../model/User.model.js';
 
 const router =express.Router();
 
+import { protect } from '../middleware/auth.middleware.js';
+router.use(protect);
+
 router.post('/register',async(req,res)=>{ 
     try{
         const {email,password}=req.body;
