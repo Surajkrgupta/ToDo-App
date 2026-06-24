@@ -7,7 +7,7 @@ const authHeader=()=>({
 });
 
 export const register=async(email,password)=>{
-    console.log('Body received:', req.body); // ← add this
+    
     const res=await fetch(`${AUTH_URL}/register`,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
