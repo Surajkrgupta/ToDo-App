@@ -24,7 +24,7 @@ export const login=async(email,password)=>{
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({email,password})
     });
-    if(!res.ok) throw new Error('Invalid Mail or Password');
+    if(!res.ok) throw new Error(Error.name);
     return res.json();
 
 }
