@@ -16,6 +16,7 @@ app.use(cros());
 app.use('/api/auth',authRoute);
 app.use('/api/todos',todoRoute);
 
-connectionDB();
-
-app.listen(3000);
+app.listen(3000,(req,res)=>{
+    connectionDB();
+    console.log("Server is Running");
+});
