@@ -1,3 +1,5 @@
+import Todo from '../model/Todo.model.js';
+
 const getTodos=async (req, res) => {
     try {
         const todos = await Todo.find({ user: req.userId });
