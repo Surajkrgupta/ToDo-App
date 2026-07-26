@@ -1,5 +1,5 @@
 import express from 'express';
-import Todo from '../model/Todo.model.js';
+
 import { protect } from '../middleware/auth.middleware.js';
 import { getTodos,patchTodo,postTodo,deleteTodo } from '../controller/todo.controller.js';
 

@@ -34,6 +34,7 @@ function App() {
     };
 
     const handleAdd = async (title) => {
+        setError(null);
         try {
             const newTodo = await addTodo(title);
             setTodos((prev) => [...prev, newTodo]);
@@ -64,12 +65,13 @@ function App() {
 
     return (
         <div className='app'>
-            <div>
-                <button onClick={handleLogout}>Logout</button>
-            </div>
+            
             {error && <p>{error}</p>}
             <TodoForm onAdd={handleAdd} />
             <TodoList todos={todos} onToggle={handleToggle} onDelete={handleDelete} />
+            <div className='text-center text-red-500'>
+                <button className= "bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" onClick={handleLogout}>Logout</button>
+            </div>
         </div>
     );
 }

@@ -22,33 +22,60 @@ export default function AuthForm({ onAuth }) {
     };
 
     return (
-        <div className="app">
-            <h1>{isLogin ? 'Login' : 'Register'}</h1>
-            {error && <p className="error">{error}</p>}
-            <form className="todo-form" onSubmit={handleSubmit}>
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button type="submit">{isLogin ? 'Login' : 'Register'}</button>
-            </form>
-            <p style={{ textAlign: 'center', marginTop: '16px', fontSize: '14px', color: '#666' }}>
-                {isLogin ? "Don't have an account?" : 'Already have an account?'}
-                <button
-                    onClick={() => setIsLogin(!isLogin)}
-                    style={{ background: 'none', border: 'none', color: '#6366f1', cursor: 'pointer', marginLeft: '6px' }}
-                >
-                    {isLogin ? 'Register' : 'Login'}
-                </button>
-            </p>
-        </div>
-    );
+  <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+    <div className="w-full max-w-lg rounded-2xl bg-white p-8 shadow-xl">
+      <h1 className="text-3xl font-bold text-center mb-8">
+        {isLogin ? "Login" : "Register"}
+      </h1>
+
+      {error && (
+        <p className="mb-4 rounded bg-red-100 p-3 text-center text-red-600">
+          {error}
+        </p>
+      )}
+
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 md:flex-row"
+      >
+        <input
+          type="email"
+          placeholder="Email"
+          className="flex-1 rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:outline-none"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          type="password"
+          placeholder="Password"
+          className="flex-1 rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:outline-none"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button
+          type="submit"
+          className="rounded-lg bg-indigo-600 px-6 py-3 font-medium text-white transition hover:bg-indigo-700"
+        >
+          {isLogin ? "Login" : "Register"}
+        </button>
+      </form>
+
+      <p className="mt-6 text-center text-gray-600">
+        {isLogin
+          ? "Don't have an account?"
+          : "Already have an account?"}
+
+        <button
+          type="button"
+          onClick={() => setIsLogin(!isLogin)}
+          className="ml-2 font-semibold text-indigo-600 hover:underline"
+        >
+          {isLogin ? "Register" : "Login"}
+        </button>
+      </p>
+    </div>
+  </div>
+);
 }
