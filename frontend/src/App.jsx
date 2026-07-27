@@ -61,7 +61,7 @@ function App() {
         }
     };
     if (!isLoginIn) return <AuthForm onAuth={handleAuth} />;
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <p className='flex min-h-screen items-center justify-center bg-gray-100'>Loading...</p>;
 
     return (
         <div className='app'>
