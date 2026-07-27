@@ -28,11 +28,7 @@ export default function AuthForm({ onAuth }) {
         {isLogin ? "Login" : "Register"}
       </h1>
 
-      {error && (
-        <p className="mb-4 rounded bg-red-100 p-3 text-center text-red-600">
-          {error}
-        </p>
-      )}
+      
 
       <form
         onSubmit={handleSubmit}
@@ -61,6 +57,11 @@ export default function AuthForm({ onAuth }) {
           {isLogin ? "Login" : "Register"}
         </button>
       </form>
+      {error && (
+        <p className="mt-4 rounded bg-red-100 p-3 text-center text-red-600">
+          {error}
+        </p>
+      )}
 
       <p className="mt-6 text-center text-gray-600">
         {isLogin
