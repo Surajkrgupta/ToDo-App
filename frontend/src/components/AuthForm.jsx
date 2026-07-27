@@ -32,7 +32,7 @@ export default function AuthForm({ onAuth }) {
 
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-4 md:flex-row"
+        className="flex flex-col gap-4"
       >
         <input
           type="email"
